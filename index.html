@@ -42,6 +42,16 @@
         }
       }
 
+      function decideWinner(playerScore, computerScore) {
+        if (playerScore > computerScore) {
+          return `Player wins! Score: ${playerScore} - ${computerScore}`;
+        } else if (playerScore < computerScore) {
+          return `Computer wins! Score: ${playerScore} - ${computerScore}`;
+        } else {
+          return `It\'s a draw! Score: ${playerScore} - ${computerScore}`;
+        }
+      }
+
       function game() {
         for (let i = 0; i < 5; i++) {
           const playerSelection = prompt('Rock, Paper or Scissors?').toLowerCase();
@@ -50,6 +60,7 @@
           console.log(result);
           keepScore(result);
         }
+        console.log(decideWinner(playerScore, computerScore));
       }
 
       game();
