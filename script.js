@@ -2,6 +2,8 @@ const hands = ['rock', 'paper', 'scissors'];
 const rockBtn = document.querySelector('.rock');
 const paperBtn = document.querySelector('.paper');
 const scissorsBtn = document.querySelector('.scissors');
+const resultDiv = document.querySelector('.result');
+const buttons = document.querySelector('.buttons');
 
 let playerScore = 0;
 let computerScore = 0;
@@ -61,14 +63,14 @@ function decideWinner(playerScore, computerScore) {
 
       game(); */
 
-rockBtn.addEventListener('click', () => {
-    console.log(playRound('rock', computerPlay()));
-});
-
-paperBtn.addEventListener('click', () => {
-    console.log(playRound('paper', computerPlay()));
-});
-
-scissorsBtn.addEventListener('click', () => {
-    console.log(playRound('scissors', computerPlay()));
+buttons.addEventListener('click', (event) => {
+    const isButton = event.target.nodeName === 'BUTTON';
+    const eventId = event.target.id;
+    const roundResult = playRound(eventId, computerPlay());
+    if (!isButton) {
+        return;
+    } 
+    resultDiv.textContent = roundResult;
+    keepScore(roundResult);
+    console.log(playerScore);
 });
