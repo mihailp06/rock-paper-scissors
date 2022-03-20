@@ -1,9 +1,8 @@
 const hands = ['rock', 'paper', 'scissors'];
-const rockBtn = document.querySelector('.rock');
-const paperBtn = document.querySelector('.paper');
-const scissorsBtn = document.querySelector('.scissors');
 const resultDiv = document.querySelector('.result');
-const buttons = document.querySelector('.buttons');
+const buttonDiv = document.querySelector('.buttonDiv');
+const playerSpan = document.querySelector('.player');
+const computerSpan = document.querySelector('.computer');
 
 let playerScore = 0;
 let computerScore = 0;
@@ -41,13 +40,13 @@ function keepScore(roundResult) {
 }
 
 function decideWinner(playerScore, computerScore) {
-    if (playerScore > computerScore) {
-        return `Player wins! Score: ${playerScore} - ${computerScore}`;
-    } else if (playerScore < computerScore) {
-        return `Computer wins! Score: ${playerScore} - ${computerScore}`;
-    } else {
-        return `It\'s a draw! Score: ${playerScore} - ${computerScore}`;
+    if (playerScore === 5) {
+        return 'Player Wins!';
     }
+    if (computerScore === 5) {
+        return 'Computer Wins!';
+    }
+    return;
 }
 
       /* function game() {
@@ -63,14 +62,21 @@ function decideWinner(playerScore, computerScore) {
 
       game(); */
 
-buttons.addEventListener('click', (event) => {
+buttonDiv.addEventListener('click', (event) => {
     const isButton = event.target.nodeName === 'BUTTON';
     const eventId = event.target.id;
     const roundResult = playRound(eventId, computerPlay());
     if (!isButton) {
         return;
     } 
+    
     resultDiv.textContent = roundResult;
+    
     keepScore(roundResult);
-    console.log(playerScore);
+    playerSpan.textContent = playerScore;
+    computerSpan.textContent = computerScore;
+
+    if (playerScore === 5 || computerScore === 5) {
+        resultDiv.textContent = decideWinner(playerScore, computerScore);  
+    }
 });
